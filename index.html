@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>Simba Pasar: Petualangan Bilangan Cacah di Pasar Tradisional Nusantara</title>
+  <!-- Tailwind CSS via CDN dengan Fallback CSS Mandiri agar tetap tampil rapi saat dibuka offline/di berbagai aplikasi -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    if (window.tailwind) {
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              display: ['Georgia', 'Palatino Linotype', 'Book Antiqua', 'serif'],
+              sans: ['system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+            },
+            colors: {
+              jati: {
+                50: '#fbf6ee',
+                100: '#f5e6c8',
+                200: '#ead3a8',
+                300: '#d2b48c',
+                600: '#8b5a2b',
+                700: '#6f4518',
+                800: '#5c3a21',
+                900: '#3b2210',
+              },
+              terakota: {
+                100: '#fae3d9',
+                500: '#c84b28',
+                600: '#a83819',
+                700: '#852910',
+              },
+              pandan: {
+                100: '#dcfce7',
+                500: '#16a34a',
+                600: '#15803d',
+                700: '#14532d',
+              },
+              kuningan: {
+                100: '#fef3c7',
+                300: '#fcd34d',
+                400: '#fbbf24',
+                500: '#d97706',
+                600: '#b45309',
+              }
+            }
+          }
+        }
+      };
+    }
+  </script>
+
+  <style>
+    /* Reset Dasar & Kompatibilitas Lintas Peramban (WebView, WhatsApp, Chrome, Safari, Offline) */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      overflow-x: hidden;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    .font-display {
+      font-family: Georgia, 'Palatino Linotype', 'Book Antiqua', serif;
+    }
+
+    /* Tekstur Latar Kertas Buram & Anyaman Gedhek Bambu Halus */
+    body {
+      background-color: #f5e6c8;
+      background-image:
+        repeating-linear-gradient(0deg, rgba(139, 90, 43, 0.06) 0px, rgba(139, 90, 43, 0.06) 2px, transparent 2px, transparent 18px),
+        repeating-linear-gradient(90deg, rgba(139, 90, 43, 0.06) 0px, rgba(139, 90, 43, 0.06) 2px, transparent 2px, transparent 18px),
+        radial-gradient(circle at 50% 0%, #fff8eb 0%, #ead3a8 100%);
+      color: #3b2210;
+    }
+
+    /* Fallback Utilitas Dasar jika dibuka tanpa internet (Offline Mode) */
+    .hidden { display: none !important; }
+    button { cursor: pointer; touch-action: manipulation; }
+
+    /* Pola Kain Batik Kawung Tradisional untuk Aksen Bingkai */
+    .batik-kawung {
+      background-color: #5c3a21;
+      background-image:
+        radial-gradient(circle at 0 0, transparent 0, transparent 9px, #d97706 10px, #d97706 12px, transparent 13px),
+        radial-gradient(circle at 24px 0, transparent 0, transparent 9px, #d97706 10px, #d97706 12px, transparent 13px),
+        radial-gradient(circle at 0 24px, transparent 0, transparent 9px, #d97706 10px, #d97706 12px, transparent 13px),
+        radial-gradient(circle at 24px 24px, transparent 0, transparent 9px, #d97706 10px, #d97706 12px, transparent 13px),
+        radial-gradient(circle at 12px 12px, #fbbf24 0, #fbbf24 3px, transparent 4px);
+      background-size: 24px 24px;
+    }
+
+    /* Atap Terpal / Tenda Los Pasar Tradisional Bergaris */
+    .terpal-los-merah {
+      background: repeating-linear-gradient(
+        90deg,
+        #a83819 0px,
+        #a83819 32px,
+        #fef3c7 32px,
+        #fef3c7 64px
+      );
+      border-bottom: 5px solid #3b2210;
+      box-shadow: 0 6px 14px rgba(59, 34, 16, 0.25);
+    }
+
+    .terpal-los-hijau {
+      background: repeating-linear-gradient(
+        90deg,
+        #15803d 0px,
+        #15803d 28px,
+        #fbbf24 28px,
+        #fbbf24 56px
+      );
+      border-bottom: 4px solid #3b2210;
+    }
+
+    /* Papan Kayu Jati Tua dengan Serat & Paku Kuningan */
+    .papan-jati {
+      background: linear-gradient(180deg, #7c4d25 0%, #5c3a21 55%, #482c18 100%);
+      border: 3px solid #3b2210;
+      box-shadow: 0 5px 0 #3b2210, inset 0 1px 0 rgba(255, 235, 190, 0.25);
+      position: relative;
+    }
+
+    /* Tekstur Anyaman Besek / Tampah Bambu */
+    .anyaman-besek {
+      background-color: #edd7af;
+      background-image:
+        linear-gradient(45deg, rgba(139, 90, 43, 0.14) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(139, 90, 43, 0.14) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(139, 90, 43, 0.14) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(139, 90, 43, 0.14) 75%);
+      background-size: 20px 20px;
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+    }
+
+    /* Kertas Pembungkus Nasi / Kertas Buram Hangat */
+    .kertas-buram {
+      background: linear-gradient(135deg, #fcf5e5 0%, #f3e2c1 100%);
+      border: 2px solid #8b5a2b;
+      box-shadow: 0 5px 0 rgba(59, 34, 16, 0.2);
+    }
+
+    /* Papan Petunjuk Kayu Navigasi */
+    .plang-kayu {
+      background: linear-gradient(180deg, #fdf3dc 0%, #ebd2a4 100%);
+      color: #3b2210;
+      border: 2px solid #5c3a21;
+      box-shadow: 0 3px 0 #5c3a21;
+    }
+    .plang-kayu:hover {
+      background: linear-gradient(180deg, #fef9ec 0%, #f5dfB5 100%);
+      transform: translateY(-1px);
+    }
+    .plang-kayu-aktif {
+      background: linear-gradient(180deg, #c84b28 0%, #962f13 100%) !important;
+      color: #fff8eb !important;
+      border: 2px solid #3b2210 !important;
+      box-shadow: 0 3px 0 #3b2210 !important;
+      transform: translateY(-1px);
+    }
+
+    /* Animasi Bohlam Pijar Hangat Bergoyang Pelan */
+    @keyframes swayBulb {
+      0%, 100% { transform: rotate(-3deg); }
+      50% { transform: rotate(3deg); }
+    }
+    .bohlam-goyang {
+      transform-origin: top center;
+      animation: swayBulb 4s ease-in-out infinite;
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.96); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .animate-pop {
+      animation: popIn 0.25s ease-out forwards;
+    }
+
+    ::-webkit-scrollbar { width: 9px; height: 9px; }
+    ::-webkit-scrollbar-track { background: #ead3a8; }
+    ::-webkit-scrollbar-thumb { background: #8b5a2b; border-radius: 9999px; border: 2px solid #ead3a8; }
+  </style>
+</head>
+<body class="font-sans antialiased min-h-screen flex flex-col">
+
+  <!-- ==================== HEADER GAPURA & ATAP TERPAL PASAR TRADISIONAL ==================== -->
+  <header class="sticky top-0 z-40 shadow-lg">
+    <!-- Lis Batik Kawung Atas -->
+    <div class="batik-kawung h-3 w-full border-b-2 border-kuningan-400"></div>
+    <!-- Atap Terpal Bergaris Merah-Krem Khas Los Pasar -->
+    <div class="terpal-los-merah h-4 w-full"></div>
+
+    <!-- Badan Papan Kayu Header -->
+    <div class="bg-jati-100/95 backdrop-blur-md border-b-4 border-jati-800 px-3 sm:px-6 py-2.5">
+      <div class="max-w-7xl mx-auto flex flex-col gap-2.5">
+        <!-- Baris Atas: Papan Nama Pasar + Kontrol Suara Kentongan/Koin -->
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('beranda')">
+            <!-- Lambang Gapura & Timbangan Kuningan -->
+            <div class="w-12 h-12 rounded-2xl papan-jati flex items-center justify-center shrink-0">
+              <svg viewBox="0 0 64 64" class="w-9 h-9">
+                <!-- Atap Joglo / Los -->
+                <path d="M4 26 L32 8 L60 26 Z" fill="#fbbf24" stroke="#3b2210" stroke-width="3"/>
+                <path d="M14 26 L32 14 L50 26 Z" fill="#c84b28" stroke="#3b2210" stroke-width="2"/>
+                <!-- Tiang Kayu -->
+                <rect x="14" y="26" width="6" height="28" fill="#d2b48c" stroke="#3b2210" stroke-width="2.5"/>
+                <rect x="44" y="26" width="6" height="28" fill="#d2b48c" stroke="#3b2210" stroke-width="2.5"/>
+                <!-- Bakul & Koin -->
+                <path d="M22 40 L42 40 L39 54 L25 54 Z" fill="#16a34a" stroke="#3b2210" stroke-width="2.5"/>
+                <circle cx="32" cy="34" r="5" fill="#fde047" stroke="#3b2210" stroke-width="2"/>
+              </svg>
+            </div>
+            <div>
+              <div class="flex flex-wrap items-center gap-2">
+                <h1 class="font-display text-xl sm:text-2xl font-bold text-jati-900 tracking-wide">
+                  SIMBA PASAR NUSANTARA
+                </h1>
+                <span class="text-[11px] font-extrabold uppercase px-2.5 py-0.5 rounded-lg bg-pandan-600 text-white border border-jati-900 shadow-xs">
+                  SD Kelas 5 • Fase C
+                </span>
+              </div>
+              <p class="text-xs font-bold text-jati-700">
+                Etnomatematika Bilangan Cacah s.d. 100.000 di Pasar Tradisional
+              </p>
+            </div>
+          </div>
+
+          <!-- Tombol Efek Suara Pasar (Koin & Kentongan Kayu) -->
+          <div class="flex items-center gap-2">
+            <span class="hidden md:inline-flex items-center gap-1.5 text-xs font-extrabold bg-kuningan-100 text-jati-900 px-3 py-1.5 rounded-xl border-2 border-jati-600">
+              <span class="w-2 h-2 rounded-full bg-pandan-500 animate-pulse"></span>
+              Pasar Buka • Selamat Datang!
+            </span>
+            <button id="btn-sound-toggle" onclick="toggleSound()" title="Aktifkan atau Nonaktifkan Suara Koin dan Kentongan"
+              class="plang-kayu px-3 py-1.5 rounded-xl text-xs font-extrabold flex items-center gap-1.5 transition">
+              <span id="sound-icon-box">
+                <svg class="w-4 h-4 text-terakota-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+                </svg>
+              </span>
+              <span id="sound-label">Suara Pasar: Aktif</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- ==================== PAPAN PETUNJUK KAYU NAVIGASI BEBAS ==================== -->
+        <nav aria-label="Papan Petunjuk Lorong Pasar" class="flex flex-wrap items-center gap-1.5 pt-1 border-t border-jati-300/80">
+          <button onclick="navigateTo('beranda')" id="nav-beranda" class="nav-btn plang-kayu plang-kayu-aktif px-3 py-1.5 rounded-xl text-xs sm:text-sm font-extrabold transition flex items-center gap-1.5">
+            <span>Beranda Pasar</span>
+          </button>
+
+          <button onclick="navigateTo('tujuan')" id="nav-tujuan" class="nav-btn plang-kayu px-3 py-1.5 rounded-xl text-xs sm:text-sm font-extrabold transition flex items-center gap-1.5">
+            <span>Tujuan & Petunjuk</span>
+          </button>
+
+          <button onclick="navigateTo('materi')" id="nav-materi" class="nav-btn plang-kayu px-3 py-1.5 rounded-xl text-xs sm:text-sm font-extrabold transition flex items-center gap-1.5">
+            <span>Materi Bilangan Cacah</span>
+          </button>
+
+          <button onclick="navigateTo('nilai-tempat')" id="nav-nilai-tempat" class="nav-btn plang-kayu px-3 py-1.5 rounded-xl text-xs sm:text-sm font-extrabold transition flex items-center gap-1.5">
+            <span>Papan Nilai Tempat</span>
+          </button>
+
+          <button onclick="navigateTo('simulasi')" id="nav-simulasi" class="nav-btn plang-kayu px-3 py-1.5 rounded-xl text-xs sm:text-sm font-extrabold transition flex items-center gap-1.5">
+            <span>Simulasi Kasir Pasar</span>
+          </button>
+
+          <button onclick="navigateTo('kuis')" id="nav-kuis" class="nav-btn plang-kayu px-3 py-1.5 rounded-xl text-xs sm:text-sm font-extrabold transition flex items-center gap-1.5">
+            <span>Evaluasi Kisi-Kisi</span>
+          </button>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== NOTIFIKASI PAPAN KAYU (TANPA ALERT) ==================== -->
+  <div id="toast-box" class="fixed bottom-5 right-5 z-50 hidden max-w-sm papan-jati text-amber-50 px-4 py-3 rounded-2xl shadow-2xl border-2 border-kuningan-400 flex items-start gap-3 animate-pop">
+    <div id="toast-icon" class="mt-0.5 shrink-0"></div>
+    <div>
+      <h4 id="toast-title" class="font-display font-bold text-sm text-kuningan-300"></h4>
+      <p id="toast-msg" class="text-xs text-amber-100 mt-0.5"></p>
+    </div>
+  </div>
+
+  <!-- ==================== KONTEN UTAMA LORONG PASAR ==================== -->
+  <main class="flex-grow max-w-7xl w-full mx-auto px-3 sm:px-6 py-6">
+
+    <!-- =====================================================================
+         1. BERANDA PASAR (GERBANG UTAMA PASAR TRADISIONAL)
+    ====================================================================== -->
+    <section id="page-beranda" class="page-section animate-pop space-y-6">
+      <!-- Gapura Utama Los Pasar Tradisional dengan Bohlam Pijar & Gantungan Dagangan -->
+      <div class="relative overflow-hidden rounded-3xl papan-jati text-amber-50 border-4 border-jati-900 shadow-xl">
+        <!-- Terpal Hijau-Kuning Bagian Atas -->
+        <div class="terpal-los-hijau h-4 w-full"></div>
+
+        <!-- Bohlam Pijar Gantung Hangat (Dekorasi Pasar Pagi) -->
+        <div class="hidden sm:flex justify-around px-12 pointer-events-none">
+          <div class="bohlam-goyang flex flex-col items-center">
+            <div class="w-0.5 h-5 bg-jati-900"></div>
+            <div class="w-4 h-5 rounded-full bg-kuningan-300 border border-kuningan-600 shadow-[0_0_16px_#fbbf24]"></div>
+          </div>
+          <div class="bohlam-goyang flex flex-col items-center" style="animation-delay: 1.2s;">
+            <div class="w-0.5 h-7 bg-jati-900"></div>
+            <div class="w-4 h-5 rounded-full bg-kuningan-300 border border-kuningan-600 shadow-[0_0_16px_#fbbf24]"></div>
+          </div>
+          <div class="bohlam-goyang flex flex-col items-center" style="animation-delay: 2.3s;">
+            <div class="w-0.5 h-4 bg-jati-900"></div>
+            <div class="w-4 h-5 rounded-full bg-kuningan-300 border border-kuningan-600 shadow-[0_0_16px_#fbbf24]"></div>
+          </div>
+        </div>
+
+        <div class="p-6 sm:p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+          <div class="lg:col-span-7 space-y-4">
+            <div class="inline-flex items-center gap-2 bg-jati-900/80 px-3.5 py-1.5 rounded-xl text-xs font-extrabold text-kuningan-300 border border-kuningan-500">
+              <span>Kearifan Lokal Nusantara • Etnomatematika Sekolah Dasar</span>
+            </div>
+            <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-amber-50">
+              Selamat Datang di <span class="text-kuningan-300 underline decoration-wavy decoration-terakota-500">Pasar Tradisional!</span>
+            </h2>
+            <p class="text-sm sm:text-base text-amber-100/95 leading-relaxed">
+              Mari mengenal suasana transaksi jual beli di pasar tradisional Indonesia! Melalui media pembelajaran ini, peserta didik belajar membaca dan menulis harga barang dagangan, menyusun nilai tempat dalam bakul bambu, melakukan praktik tawar-menawar serta satuan tradisional, dan menghitung total belanja serta uang kembalian dengan cermat hingga bilangan <strong>99.999 (s.d. 100.000)</strong>.
+            </p>
+            <div class="flex flex-wrap gap-3 pt-2">
+              <button onclick="navigateTo('tujuan')" class="bg-kuningan-400 hover:bg-kuningan-300 text-jati-900 font-display font-bold text-base px-5 py-3 rounded-2xl border-2 border-jati-900 shadow-md transition transform hover:-translate-y-0.5 flex items-center gap-2">
+                <span>Baca Tujuan & Petunjuk</span>
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              </button>
+              <button onclick="navigateTo('simulasi')" class="bg-pandan-600 hover:bg-pandan-500 text-white font-display font-bold text-base px-5 py-3 rounded-2xl border-2 border-jati-900 shadow-md transition">
+                Mulai Simulasi Kasir Pasar
+              </button>
+            </div>
+          </div>
+
+          <!-- Ilustrasi SVG Panorama Los Pasar Tradisional Lengkap -->
+          <div class="lg:col-span-5 flex justify-center">
+            <div class="bg-jati-100 p-3 rounded-3xl border-4 border-jati-900 shadow-inner w-full max-w-md">
+              <svg viewBox="0 0 380 250" class="w-full h-auto">
+                <!-- Latar Hangat Pasar Pagi -->
+                <rect x="0" y="0" width="380" height="250" rx="14" fill="#fef3c7"/>
+                <!-- Sinar Matahari Pagi -->
+                <circle cx="320" cy="45" r="26" fill="#fde68a" opacity="0.7"/>
+                <!-- Tiang Bambu & Kayu Jati Los Pasar -->
+                <rect x="28" y="65" width="14" height="165" fill="#6f4518" stroke="#3b2210" stroke-width="2.5"/>
+                <rect x="338" y="65" width="14" height="165" fill="#6f4518" stroke="#3b2210" stroke-width="2.5"/>
+                <!-- Atap Genteng & Terpal Los -->
+                <polygon points="10,72 370,72 342,18 38,18" fill="#a83819" stroke="#3b2210" stroke-width="3"/>
+                <polygon points="60,72 102,72 95,18 68,18" fill="#fbbf24"/>
+                <polygon points="145,72 187,72 185,18 147,18" fill="#fbbf24"/>
+                <polygon points="230,72 272,72 268,18 232,18" fill="#fbbf24"/>
+                <!-- Papan Nama Kayu Gantung -->
+                <rect x="75" y="38" width="230" height="30" rx="6" fill="#3b2210" stroke="#fbbf24" stroke-width="2.5"/>
+                <text x="190" y="57" text-anchor="middle" fill="#fef3c7" font-family="Philosopher, serif" font-size="13" font-weight="bold">PASAR TRADISIONAL NUSANTARA</text>
+                <!-- Gantungan Pisang & Bawang di Atas Lapak -->
+                <path d="M62 72 L62 96" stroke="#3b2210" stroke-width="2"/>
+                <path d="M52 98 Q62 114 72 98" fill="none" stroke="#eab308" stroke-width="6" stroke-linecap="round"/>
+                <path d="M54 103 Q62 118 70 103" fill="none" stroke="#facc15" stroke-width="5" stroke-linecap="round"/>
+                <path d="M318 72 L318 95" stroke="#3b2210" stroke-width="2"/>
+                <circle cx="314" cy="99" r="5" fill="#a855f7" stroke="#3b2210" stroke-width="1.5"/>
+                <circle cx="322" cy="101" r="5" fill="#c084fc" stroke="#3b2210" stroke-width="1.5"/>
+                <!-- Meja Kayu Jati Lapak -->
+                <rect x="20" y="162" width="340" height="62" rx="6" fill="#8b5a2b" stroke="#3b2210" stroke-width="3"/>
+                <line x1="20" y1="182" x2="360" y2="182" stroke="#3b2210" stroke-width="2"/>
+                <!-- Karung Beras Goni Terbuka -->
+                <path d="M48 162 L96 162 L92 122 L52 122 Z" fill="#d2b48c" stroke="#3b2210" stroke-width="2.5"/>
+                <ellipse cx="72" cy="122" rx="20" ry="6" fill="#fffbeb" stroke="#3b2210" stroke-width="2"/>
+                <rect x="52" y="142" width="40" height="15" rx="3" fill="#ffffff" stroke="#3b2210" stroke-width="1.5"/>
+                <text x="72" y="152" text-anchor="middle" fill="#3b2210" font-size="8" font-weight="bold">Rp75.000</text>
+                <!-- Tampah Bambu Jajanan Daun Pisang -->
+                <ellipse cx="165" cy="158" rx="44" ry="13" fill="#d97706" stroke="#3b2210" stroke-width="2.5"/>
+                <ellipse cx="165" cy="154" rx="35" ry="9" fill="#16a34a"/>
+                <circle cx="155" cy="152" r="5" fill="#4ade80" stroke="#14532d" stroke-width="1.5"/>
+                <circle cx="166" cy="151" r="5" fill="#4ade80" stroke="#14532d" stroke-width="1.5"/>
+                <circle cx="176" cy="153" r="5" fill="#4ade80" stroke="#14532d" stroke-width="1.5"/>
+                <rect x="145" y="132" width="40" height="14" rx="3" fill="#ffffff" stroke="#3b2210" stroke-width="1.5"/>
+                <text x="165" y="142" text-anchor="middle" fill="#3b2210" font-size="8" font-weight="bold">Rp12.500</text>
+                <!-- Timbangan Bebek Kuningan Tradisional -->
+                <rect x="242" y="142" width="52" height="20" rx="4" fill="#15803d" stroke="#3b2210" stroke-width="2.5"/>
+                <path d="M254 142 L254 130 M282 142 L282 130" stroke="#3b2210" stroke-width="2.5"/>
+                <ellipse cx="254" cy="128" rx="16" ry="5" fill="#fbbf24" stroke="#3b2210" stroke-width="2"/>
+                <ellipse cx="282" cy="128" rx="16" ry="5" fill="#fbbf24" stroke="#3b2210" stroke-width="2"/>
+                <!-- Lantai Batu Bata Pasar -->
+                <rect x="8" y="224" width="364" height="14" rx="5" fill="#5c3a21"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="batik-kawung h-3 w-full border-t-2 border-kuningan-400"></div>
+      </div>
+
+      <!-- Cerita Kearifan Lokal & Papan Lorong Belajar Bebas -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Kartu Budaya & Karakter Pasar Tradisional (5 Kolom) -->
+        <div class="lg:col-span-5 kertas-buram rounded-3xl p-6 flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-jati-800 text-kuningan-300 font-bold text-xs">
+              <span>Nilai Budaya Pasar Tradisional</span>
+            </div>
+            <h3 class="font-display text-2xl font-bold text-jati-900">
+              Kejujuran dan Ketelitian dalam Transaksi Pasar
+            </h3>
+            <p class="text-sm text-jati-800 leading-relaxed">
+              Di pasar tradisional Nusantara, kegiatan jual beli tidak hanya berkaitan dengan perhitungan bilangan, tetapi juga menanamkan nilai <strong>kejujuran, kesantunan, dan ketelitian</strong>. Pedagang menakar barang dengan timbangan kuningan dan menghitung uang kembalian secara terbuka di hadapan pembeli.
+            </p>
+          </div>
+
+          <div class="anyaman-besek p-4 rounded-2xl border-2 border-jati-700 space-y-2 text-xs sm:text-sm text-jati-900">
+            <p class="font-display font-bold text-base text-terakota-700">Praktik Etnomatematika Pasar Tradisional:</p>
+            <p>• <strong>Satuan Takaran Tradisional:</strong> Pedagang menggunakan satuan khas seperti <em>literan</em> (beras), <em>ikat</em> (singkong/sayur), <em>sisir</em> (pisang), <em>pincuk</em> dan <em>besek</em> (jajanan), serta <em>kodi</em> (20 buah/helai).</p>
+            <p>• <strong>Tawar-Menawar Santun:</strong> Pembeli dan pedagang bersepakat menentukan potongan harga secara ramah dengan menghitung selisih bilangan secara tepat.</p>
+            <p>• <strong>Uang Kembalian:</strong> Selisih uang yang dikembalikan pedagang apabila uang pembayaran pembeli lebih besar daripada total belanja.</p>
+          </div>
+        </div>
+
+        <!-- Peta Lorong Pasar Bebas (7 Kolom) -->
+        <div class="lg:col-span-7 kertas-buram rounded-3xl p-6 space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b-2 border-jati-300 pb-3">
+            <div>
+              <h3 class="font-display text-2xl font-bold text-jati-900">Daftar Menu Pembelajaran (Navigasi Bebas)</h3>
+              <p class="text-xs sm:text-sm font-semibold text-jati-700">Peserta didik dapat memilih bagian pembelajaran mana saja secara bebas.</p>
+            </div>
+            <span class="px-3 py-1 rounded-xl bg-pandan-600 text-white font-extrabold text-xs border border-jati-900">
+              Akses Bebas
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <button onclick="navigateTo('tujuan')" class="text-left p-4 rounded-2xl bg-amber-50/90 hover:bg-amber-100 border-2 border-jati-600 transition flex items-start gap-3 shadow-xs">
+              <div class="w-10 h-10 rounded-xl papan-jati text-kuningan-300 font-display font-bold text-lg flex items-center justify-center shrink-0">I</div>
+              <div>
+                <h4 class="font-display font-bold text-base text-jati-900">Tujuan & Petunjuk</h4>
+                <p class="text-xs text-jati-700 mt-0.5">Memuat tujuan pembelajaran Fase C dan petunjuk penggunaan aplikasi.</p>
+              </div>
+            </button>
+
+            <button onclick="navigateTo('materi')" class="text-left p-4 rounded-2xl bg-emerald-50/90 hover:bg-emerald-100 border-2 border-pandan-700 transition flex items-start gap-3 shadow-xs">
+              <div class="w-10 h-10 rounded-xl papan-jati text-kuningan-300 font-display font-bold text-lg flex items-center justify-center shrink-0">II</div>
+              <div>
+                <h4 class="font-display font-bold text-base text-jati-900">Materi Bilangan Cacah</h4>
+                <p class="text-xs text-jati-700 mt-0.5">Mempelajari bilangan s.d. 100.000 serta pecahan uang kertas dan logam Rupiah.</p>
+              </div>
+            </button>
+
+            <button onclick="navigateTo('nilai-tempat')" class="text-left p-4 rounded-2xl bg-orange-50/90 hover:bg-orange-100 border-2 border-terakota-600 transition flex items-start gap-3 shadow-xs">
+              <div class="w-10 h-10 rounded-xl papan-jati text-kuningan-300 font-display font-bold text-lg flex items-center justify-center shrink-0">III</div>
+              <div>
+                <h4 class="font-display font-bold text-base text-jati-900">Papan Nilai Tempat</h4>
+                <p class="text-xs text-jati-700 mt-0.5">Menyusun keping kayu ke dalam lima bakul bambu nilai tempat.</p>
+              </div>
+            </button>
+
+            <button onclick="navigateTo('simulasi')" class="text-left p-4 rounded-2xl bg-yellow-50/90 hover:bg-yellow-100 border-2 border-kuningan-600 transition flex items-start gap-3 shadow-xs">
+              <div class="w-10 h-10 rounded-xl papan-jati text-kuningan-300 font-display font-bold text-lg flex items-center justify-center shrink-0">IV</div>
+              <div>
+                <h4 class="font-display font-bold text-base text-jati-900">Simulasi Kasir Pasar</h4>
+                <p class="text-xs text-jati-700 mt-0.5">Melayani transaksi pembeli di tiga los pasar dan menyusun uang kembalian.</p>
+              </div>
+            </button>
+
+            <button onclick="navigateTo('kuis')" class="sm:col-span-2 text-left p-4 rounded-2xl papan-jati text-amber-50 hover:opacity-95 transition flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3.5">
+                <div class="w-11 h-11 rounded-xl bg-kuningan-400 text-jati-900 border-2 border-jati-900 font-display font-bold text-xl flex items-center justify-center shrink-0">V</div>
+                <div>
+                  <h4 class="font-display font-bold text-lg text-kuningan-300">Evaluasi Kisi-Kisi (10 Butir Soal)</h4>
+                  <p class="text-xs text-amber-100">Mengerjakan soal evaluasi sesuai indikator pembelajaran dan melihat hasil penilaian.</p>
+                </div>
+              </div>
+              <span class="hidden sm:inline-block px-3.5 py-1.5 bg-kuningan-400 text-jati-900 text-xs font-extrabold rounded-xl border border-jati-900">
+                Mulai Evaluasi →
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         2. TUJUAN & PETUNJUK PEMBELAJARAN
+    ====================================================================== -->
+    <section id="page-tujuan" class="page-section hidden animate-pop space-y-6">
+      <div class="papan-jati text-amber-50 rounded-2xl px-6 py-4 flex flex-wrap items-center justify-between gap-2">
+        <div>
+          <h2 class="font-display text-2xl font-bold text-kuningan-300">Tujuan Pembelajaran & Petunjuk Penggunaan</h2>
+          <p class="text-xs sm:text-sm text-amber-100">Kurikulum Merdeka • Mata Pelajaran Matematika SD Kelas 5 (Fase C)</p>
+        </div>
+        <span class="bg-pandan-600 text-white font-extrabold text-xs px-3.5 py-1.5 rounded-xl border border-jati-900">
+          Bilangan Cacah s.d. 100.000
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Tujuan Pembelajaran -->
+        <div class="kertas-buram rounded-3xl p-6 space-y-4">
+          <h3 class="font-display text-xl font-bold text-jati-900 border-b-2 border-jati-300 pb-2">
+            Tujuan Pembelajaran & Rasional ATP Kelas 5
+          </h3>
+
+          <div class="anyaman-besek border-2 border-jati-700 rounded-2xl p-4 text-sm text-jati-900 space-y-2">
+            <p class="font-bold text-terakota-700">Capaian Pembelajaran (CP) Elemen Bilangan Fase C:</p>
+            <p class="leading-relaxed">
+              Peserta didik menunjukkan pemahaman dan intuisi bilangan (<em>number sense</em>) pada bilangan cacah sampai <strong>100.000</strong>: membaca, menulis, menentukan nilai tempat, membandingkan, mengurutkan, melakukan komposisi dan dekomposisi bilangan, serta menyelesaikan masalah yang berkaitan dengan uang.
+            </p>
+            <div class="bg-amber-50/95 p-3 rounded-xl border border-jati-500 text-xs leading-relaxed">
+              <strong class="text-jati-900">Rasional Batas 100.000 & Rp99.999 dalam ATP/Modul Ajar:</strong>
+              Sesuai Alur Tujuan Pembelajaran (ATP) Matematika SD Kelas 5, peserta didik mempelajari 5 nilai tempat (<em>puluh ribuan, ribuan, ratusan, puluhan, dan satuan</em>) hingga batas 100.000. Pada <strong>Simulasi Kasir</strong>, total belanja dibatasi maksimal <strong>Rp99.999</strong> (5 angka) agar peserta didik dapat mempraktikkan kelima nilai tempat tersebut sekaligus berlatih menghitung uang kembalian hingga lembar pecahan Rp100.000 tanpa menghasilkan selisih negatif.
+            </div>
+          </div>
+
+          <ul class="space-y-2.5 text-sm text-jati-900">
+            <li class="flex items-start gap-2.5 bg-white/80 p-3 rounded-xl border border-jati-300">
+              <span class="w-6 h-6 rounded-lg bg-terakota-600 text-white font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">1</span>
+              <span><strong>Membaca dan menulis lambang bilangan</strong> cacah sampai 100.000 melalui label harga bahan pangan dan makanan tradisional.</span>
+            </li>
+            <li class="flex items-start gap-2.5 bg-white/80 p-3 rounded-xl border border-jati-300">
+              <span class="w-6 h-6 rounded-lg bg-terakota-600 text-white font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">2</span>
+              <span><strong>Menentukan nilai tempat</strong> (puluh ribuan, ribuan, ratusan, puluhan, dan satuan) pada wadah bakul bambu.</span>
+            </li>
+            <li class="flex items-start gap-2.5 bg-white/80 p-3 rounded-xl border border-jati-300">
+              <span class="w-6 h-6 rounded-lg bg-terakota-600 text-white font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">3</span>
+              <span><strong>Memahami praktik etnomatematika pasar</strong> berupa satuan tradisional (literan, ikat, sisir, pincuk, besek, kodi) dan tawar-menawar harga.</span>
+            </li>
+            <li class="flex items-start gap-2.5 bg-white/80 p-3 rounded-xl border border-jati-300">
+              <span class="w-6 h-6 rounded-lg bg-terakota-600 text-white font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">4</span>
+              <span><strong>Menghitung uang kembalian</strong> dari berbagai variasi uang pembayaran pembeli dan menyusun komposisi pecahan Rupiah.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Petunjuk Penggunaan, Alur & Fungsi Tombol -->
+        <div class="kertas-buram rounded-3xl p-6 space-y-4">
+          <h3 class="font-display text-xl font-bold text-jati-900 border-b-2 border-jati-300 pb-2">
+            Petunjuk Penggunaan, Alur Belajar & Fungsi Tombol
+          </h3>
+
+          <div class="space-y-3 text-sm text-jati-900">
+            <div class="p-3.5 rounded-2xl bg-white/80 border-2 border-jati-300">
+              <h4 class="font-display font-bold text-base text-terakota-700">1. Alur Belajar Bebas (Non-Linear)</h4>
+              <p class="text-xs sm:text-sm mt-0.5">Peserta didik tidak terikat urutan kaku. Gunakan barisan papan petunjuk kayu di bagian atas untuk memilih <strong>Materi</strong>, <strong>Papan Nilai Tempat</strong>, <strong>Simulasi Kasir</strong>, atau <strong>Evaluasi</strong> sesuai kebutuhan belajar.</p>
+            </div>
+            <div class="p-3.5 rounded-2xl bg-white/80 border-2 border-jati-300">
+              <h4 class="font-display font-bold text-base text-pandan-700">2. Fungsi Tombol Utama pada Aplikasi</h4>
+              <ul class="text-xs sm:text-sm mt-1 space-y-1">
+                <li>• <strong>Suara Pasar (Aktif/Nonaktif):</strong> Menghidupkan atau mematikan efek bunyi gemerincing koin dan ketukan kayu bambu tanpa bergantung pada suara robot peramban.</li>
+                <li>• <strong>Tombol (+) dan (-):</strong> Menambah atau mengurangi keping nilai tempat di bakul bambu maupun jumlah barang di bakul belanja.</li>
+                <li>• <strong>Tawar Harga (Potongan Pasar):</strong> Mempraktikkan pengurangan harga hasil tawar-menawar santun antara pembeli dan pedagang.</li>
+                <li>• <strong>Datangkan Pembeli Baru (Acak):</strong> Menghadirkan variasi kombinasi belanja dan variasi pecahan uang pembeli secara otomatis.</li>
+              </ul>
+            </div>
+            <div class="p-3.5 rounded-2xl bg-white/80 border-2 border-jati-300">
+              <h4 class="font-display font-bold text-base text-jati-800">3. Evaluasi Kisi-Kisi & Pembahasan</h4>
+              <p class="text-xs sm:text-sm mt-0.5">Setelah memilih jawaban pada 10 soal evaluasi, kotak pembahasan akan tetap tampil hingga peserta didik menekan tombol <strong>"Soal Berikutnya →"</strong>.</p>
+            </div>
+          </div>
+
+          <div class="pt-1 flex justify-end">
+            <button onclick="navigateTo('materi')" class="bg-terakota-600 hover:bg-terakota-700 text-white font-display font-bold px-5 py-2.5 rounded-xl border-2 border-jati-900 transition">
+              Lanjut ke Materi Bilangan Cacah →
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         3. MATERI BILANGAN CACAH & GALERI UANG RUPIAH
+    ====================================================================== -->
+    <section id="page-materi" class="page-section hidden animate-pop space-y-6">
+      <div class="papan-jati text-amber-50 rounded-2xl px-6 py-4 flex flex-wrap items-center justify-between gap-2">
+        <div>
+          <h2 class="font-display text-2xl font-bold text-kuningan-300">Materi Bilangan Cacah & Pecahan Uang Rupiah</h2>
+          <p class="text-xs sm:text-sm text-amber-100">Memahami Nilai Tempat sampai 100.000 serta Uang Kertas dan Logam Indonesia</p>
+        </div>
+        <button onclick="navigateTo('nilai-tempat')" class="bg-kuningan-400 hover:bg-kuningan-300 text-jati-900 font-extrabold text-xs px-4 py-2 rounded-xl border-2 border-jati-900">
+          Latihan di Papan Nilai Tempat →
+        </button>
+      </div>
+
+      <!-- Penjelasan Nilai Tempat dengan Konteks Pasar -->
+      <div class="kertas-buram rounded-3xl p-6 space-y-5">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b-2 border-jati-300 pb-4">
+          <div>
+            <span class="text-xs font-extrabold uppercase tracking-wider text-terakota-700">Bagian 1 • Konsep Nilai Tempat</span>
+            <h3 class="font-display text-2xl font-bold text-jati-900">Membaca Label Harga Dagangan dan Menentukan Nilai Tempat</h3>
+          </div>
+          <div class="anyaman-besek border-2 border-jati-700 px-4 py-2.5 rounded-2xl">
+            <span class="text-xs font-bold text-jati-800 block">Label Harga 1 Karung Beras Cianjur:</span>
+            <span class="font-display text-2xl font-bold text-terakota-700">Rp84.500</span>
+            <span class="text-xs font-bold text-jati-900 block">(Delapan puluh empat ribu lima ratus rupiah)</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 text-center">
+          <div class="p-4 rounded-2xl bg-rose-50 border-2 border-rose-700">
+            <span class="text-xs font-extrabold uppercase text-rose-800">Puluh Ribuan</span>
+            <div class="font-display text-3xl font-bold text-rose-900 my-1">8</div>
+            <span class="text-xs font-bold text-rose-900 bg-rose-200 px-2 py-0.5 rounded-lg">Nilainya 80.000</span>
+          </div>
+          <div class="p-4 rounded-2xl bg-amber-50 border-2 border-amber-700">
+            <span class="text-xs font-extrabold uppercase text-amber-800">Ribuan</span>
+            <div class="font-display text-3xl font-bold text-amber-900 my-1">4</div>
+            <span class="text-xs font-bold text-amber-900 bg-amber-200 px-2 py-0.5 rounded-lg">Nilainya 4.000</span>
+          </div>
+          <div class="p-4 rounded-2xl bg-emerald-50 border-2 border-emerald-700">
+            <span class="text-xs font-extrabold uppercase text-emerald-800">Ratusan</span>
+            <div class="font-display text-3xl font-bold text-emerald-900 my-1">5</div>
+            <span class="text-xs font-bold text-emerald-900 bg-emerald-200 px-2 py-0.5 rounded-lg">Nilainya 500</span>
+          </div>
+          <div class="p-4 rounded-2xl bg-sky-50 border-2 border-sky-700">
+            <span class="text-xs font-extrabold uppercase text-sky-800">Puluhan</span>
+            <div class="font-display text-3xl font-bold text-sky-900 my-1">0</div>
+            <span class="text-xs font-bold text-sky-900 bg-sky-200 px-2 py-0.5 rounded-lg">Nilainya 0</span>
+          </div>
+          <div class="col-span-2 sm:col-span-1 p-4 rounded-2xl bg-purple-50 border-2 border-purple-700">
+            <span class="text-xs font-extrabold uppercase text-purple-800">Satuan</span>
+            <div class="font-display text-3xl font-bold text-purple-900 my-1">0</div>
+            <span class="text-xs font-bold text-purple-900 bg-purple-200 px-2 py-0.5 rounded-lg">Nilainya 0</span>
+          </div>
+        </div>
+
+        <!-- Contoh Bertahap & Latihan Menulis Lambang Bilangan dari Kata -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 pt-2 border-t-2 border-jati-300">
+          <!-- Contoh Bertahap (6 Kolom) -->
+          <div class="lg:col-span-6 anyaman-besek rounded-2xl p-4 border-2 border-jati-700 space-y-2.5">
+            <span class="text-xs font-extrabold uppercase text-terakota-700">Contoh Bertahap Membaca & Menulis Bilangan:</span>
+            <div class="bg-white/90 p-3 rounded-xl border border-jati-400 text-xs sm:text-sm space-y-1">
+              <p class="font-extrabold text-jati-900">Tahap 1 (Bilangan Empat Angka — Ribuan):</p>
+              <p>Nama bilangan: <em>"Tujuh ribu lima ratus"</em> → Lambang bilangan: <strong>7.500</strong></p>
+            </div>
+            <div class="bg-white/90 p-3 rounded-xl border border-jati-400 text-xs sm:text-sm space-y-1">
+              <p class="font-extrabold text-jati-900">Tahap 2 (Bilangan Lima Angka dengan Nol di Tengah):</p>
+              <p>Nama bilangan: <em>"Empat puluh ribu lima ratus"</em> → Lambang bilangan: <strong>40.500</strong></p>
+            </div>
+            <div class="bg-white/90 p-3 rounded-xl border border-jati-400 text-xs sm:text-sm space-y-1">
+              <p class="font-extrabold text-jati-900">Tahap 3 (Bilangan Lima Angka Lengkap):</p>
+              <p>Nama bilangan: <em>"Sembilan puluh lima ribu dua ratus empat"</em> → Lambang bilangan: <strong>95.204</strong></p>
+            </div>
+          </div>
+
+          <!-- Latihan Interaktif Menulis Lambang Bilangan dari Nama Bilangan (6 Kolom) -->
+          <div class="lg:col-span-6 bg-white/90 rounded-2xl p-4 border-2 border-jati-800 flex flex-col justify-between space-y-3">
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-extrabold uppercase text-pandan-700">Latihan Mandiri: Menulis Lambang Bilangan</span>
+                <button onclick="nextWritePracticeQuestion()" class="text-xs font-extrabold text-terakota-700 hover:underline">
+                  Ganti Soal Latihan ↻
+                </button>
+              </div>
+              <p class="text-xs text-jati-700">Tuliskan lambang bilangan (angka saja tanpa titik atau dengan titik) dari nama bilangan berikut:</p>
+              <div class="p-3 rounded-xl bg-amber-50 border border-jati-500">
+                <p id="write-practice-words" class="font-display font-bold text-base sm:text-lg text-jati-900">
+                  "Enam puluh tiga ribu empat ratus lima puluh"
+                </p>
+              </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-2">
+              <input type="text" id="write-practice-input" placeholder="Ketik angka, misal: 63450"
+                class="flex-grow px-3.5 py-2 rounded-xl border-2 border-jati-800 font-display font-bold text-base text-jati-900 bg-amber-50 focus:outline-none focus:ring-2 focus:ring-pandan-600" />
+              <button onclick="checkWritePracticeAnswer()" class="bg-pandan-600 hover:bg-pandan-700 text-white font-extrabold text-xs sm:text-sm px-4 py-2.5 rounded-xl border-2 border-jati-900 transition shrink-0">
+                Periksa Penulisan
+              </button>
+            </div>
+
+            <div id="write-practice-feedback" class="hidden text-xs font-bold p-2.5 rounded-xl border"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Galeri Uang Rupiah Lengkap (Kertas & Logam SVG) -->
+      <div class="kertas-buram rounded-3xl p-6 space-y-4">
+        <div>
+          <span class="text-xs font-extrabold uppercase tracking-wider text-pandan-700">Bagian 2 • Mata Uang Resmi Indonesia</span>
+          <h3 class="font-display text-2xl font-bold text-jati-900">Mengenal Pecahan Uang Kertas dan Uang Logam Rupiah</h3>
+          <p class="text-sm text-jati-800">Perhatikan warna, bentuk, dan nilai nominal setiap pecahan uang Rupiah yang digunakan dalam transaksi di pasar:</p>
+        </div>
+
+        <div id="galeri-uang-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Diisi via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         4. PAPAN NILAI TEMPAT (5 BAKUL BAMBU & KEPING KAYU)
+    ====================================================================== -->
+    <section id="page-nilai-tempat" class="page-section hidden animate-pop space-y-6">
+      <div class="papan-jati text-amber-50 rounded-2xl px-6 py-4 flex flex-wrap items-center justify-between gap-2">
+        <div>
+          <h2 class="font-display text-2xl font-bold text-kuningan-300">Papan Nilai Tempat: Lima Bakul Bambu Bilangan</h2>
+          <p class="text-xs sm:text-sm text-amber-100">Masukkan keping kayu bernilai ke dalam setiap bakul bambu hingga sesuai dengan bilangan harga target.</p>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button onclick="generateRandomPlaceValueTask()" class="bg-kuningan-400 hover:bg-kuningan-300 text-jati-900 font-extrabold text-xs sm:text-sm px-4 py-2 rounded-xl border-2 border-jati-900 transition">
+            Soal Harga Acak
+          </button>
+          <button onclick="resetPlaceValueBoard()" class="bg-white/20 hover:bg-white/30 text-white font-bold text-xs sm:text-sm px-3 py-2 rounded-xl border border-white/40 transition">
+            Kosongkan Bakul
+          </button>
+        </div>
+      </div>
+
+      <div class="kertas-buram rounded-3xl p-6 space-y-6">
+        <!-- Papan Target Harga Barang -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-center anyaman-besek p-4 rounded-2xl border-2 border-jati-700">
+          <div class="lg:col-span-7 space-y-1">
+            <span class="text-xs font-extrabold uppercase text-terakota-700">Soal Label Harga Los Pasar:</span>
+            <h3 id="pv-story-title" class="font-display text-lg sm:text-xl font-bold text-jati-900">
+              Harga 1 Karung Beras Pandan Wangi adalah Rp75.050
+            </h3>
+            <p id="pv-story-words" class="text-xs sm:text-sm font-bold text-jati-800 italic">
+              Terbilang: "Tujuh puluh lima ribu lima puluh rupiah"
+            </p>
+          </div>
+
+          <div class="lg:col-span-5 flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+            <div class="flex-grow">
+              <label for="pv-custom-input" class="block text-xs font-extrabold text-jati-900 mb-1">Masukkan Bilangan Target (0 - 99.999):</label>
+              <input type="number" id="pv-custom-input" min="0" max="99999" value="75050"
+                class="w-full px-3 py-2 rounded-xl border-2 border-jati-800 font-display font-bold text-lg text-jati-900 bg-white focus:outline-none focus:ring-2 focus:ring-terakota-500" />
+            </div>
+            <button onclick="applyCustomPlaceValueTarget()" class="sm:mt-5 bg-terakota-600 hover:bg-terakota-700 text-white font-extrabold text-sm px-4 py-2.5 rounded-xl border-2 border-jati-900 transition shrink-0">
+              Terapkan Bilangan
+            </button>
+          </div>
+        </div>
+
+        <!-- 5 Bakul Bambu Nilai Tempat -->
+        <div class="grid grid-cols-1 sm:grid-cols-5 gap-3.5" id="pv-columns-grid">
+          <!-- Diisi oleh JS -->
+        </div>
+
+        <!-- Ringkasan Susunan Siswa -->
+        <div class="bg-white/90 rounded-2xl p-5 border-2 border-jati-800 flex flex-col lg:flex-row items-center justify-between gap-4">
+          <div class="space-y-1 text-center lg:text-left">
+            <span class="text-xs font-extrabold uppercase text-jati-700">Jumlah Bilangan dalam Kelima Bakul:</span>
+            <div class="flex flex-wrap items-baseline justify-center lg:justify-start gap-3">
+              <span id="pv-current-number" class="font-display text-3xl sm:text-4xl font-bold text-jati-900">0</span>
+              <span id="pv-decomposition-text" class="text-xs sm:text-sm font-extrabold text-terakota-700 bg-jati-100 px-3 py-1 rounded-xl border border-jati-400">
+                0 + 0 + 0 + 0 + 0
+              </span>
+            </div>
+            <p id="pv-current-words" class="text-xs sm:text-sm font-bold text-jati-800">Terbilang: Nol</p>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-center gap-3">
+            <button onclick="autoFillPlaceValue()" class="plang-kayu font-bold text-xs sm:text-sm px-4 py-3 rounded-xl transition">
+              Tampilkan Contoh Susunan
+            </button>
+            <button onclick="checkPlaceValueAnswer()" class="bg-pandan-600 hover:bg-pandan-700 text-white font-display font-bold text-sm sm:text-base px-6 py-3 rounded-xl border-2 border-jati-900 shadow-md transition">
+              Periksa Jawaban
+            </button>
+          </div>
+        </div>
+
+        <div id="pv-feedback" class="hidden rounded-2xl p-4 border-2 text-sm font-bold"></div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         5. SIMULASI KASIR PASAR TRADISIONAL
+    ====================================================================== -->
+    <section id="page-simulasi" class="page-section hidden animate-pop space-y-6">
+      <!-- Papan Atas Los Pedagang -->
+      <div class="papan-jati text-amber-50 rounded-2xl px-6 py-4 flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h2 class="font-display text-2xl font-bold text-kuningan-300">Simulasi Kasir Pasar Tradisional</h2>
+          <p class="text-xs sm:text-sm text-amber-100">Hitung total belanjaan pembeli secara cermat, kemudian susun uang kembalian dari laci kasir kayu.</p>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button onclick="generateRandomCustomerOrder()" class="bg-pandan-600 hover:bg-pandan-500 text-white font-extrabold text-xs sm:text-sm px-4 py-2 rounded-xl border-2 border-jati-900 shadow-xs transition">
+            Datangkan Pembeli Baru (Acak)
+          </button>
+          <button onclick="resetTransaction()" class="bg-kuningan-400 hover:bg-kuningan-300 text-jati-900 font-extrabold text-xs sm:text-sm px-4 py-2 rounded-xl border-2 border-jati-900 transition">
+            Atur Ulang Transaksi
+          </button>
+        </div>
+      </div>
+
+      <!-- Karakter Pembeli & Pedagang Berpakaian Tradisional -->
+      <div class="kertas-buram rounded-2xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div class="flex items-center gap-3.5">
+          <!-- Avatar SVG Warga Lokal Berpakaian Tradisional -->
+          <div id="customer-avatar-box" class="w-14 h-14 rounded-2xl papan-jati flex items-center justify-center shrink-0">
+            <!-- Diisi dinamis oleh JS -->
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-extrabold uppercase px-2.5 py-0.5 rounded-lg bg-terakota-600 text-white" id="merchant-stall-badge">Los Sembako Bu Siti</span>
+              <span class="text-xs font-bold text-jati-700" id="customer-name-tag">Pembeli: Ibu Siti</span>
+            </div>
+            <p id="merchant-dialogue" class="text-xs sm:text-sm font-bold text-jati-900 mt-1">
+              "Selamat pagi, Nak. Saya hendak membeli beberapa bahan pokok. Tolong hitung total belanja dan uang kembaliannya dengan teliti, ya."
+            </p>
+          </div>
+        </div>
+
+        <!-- Indikator Timbangan Bebek Tradisional -->
+        <div class="hidden xl:flex items-center gap-2 bg-white/80 px-3.5 py-2 rounded-xl border border-jati-400 shrink-0">
+          <svg viewBox="0 0 60 40" class="w-11 h-8">
+            <rect x="10" y="22" width="40" height="14" rx="3" fill="#15803d" stroke="#3b2210" stroke-width="2"/>
+            <ellipse cx="18" cy="14" rx="12" ry="4" fill="#fbbf24" stroke="#3b2210" stroke-width="1.8"/>
+            <ellipse cx="42" cy="14" rx="12" ry="4" fill="#fbbf24" stroke="#3b2210" stroke-width="1.8"/>
+            <path d="M18 22 L18 16 M42 22 L42 16" stroke="#3b2210" stroke-width="2"/>
+          </svg>
+          <div class="text-xs">
+            <span class="font-extrabold text-jati-900 block">Timbangan Kuningan</span>
+            <span class="text-jati-700">Takaran Tepat</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- KOLOM KIRI (7 Kolom): ETALASE 3 LOS PEDAGANG PASAR -->
+        <div class="lg:col-span-7 space-y-4">
+          <div class="flex flex-wrap gap-2">
+            <button onclick="switchStall('sembako')" id="stall-btn-sembako" class="stall-tab plang-kayu plang-kayu-aktif font-display font-bold text-xs sm:text-sm px-4 py-2 rounded-xl transition">
+              Los Sembako Bu Siti
+            </button>
+            <button onclick="switchStall('jajanan')" id="stall-btn-jajanan" class="stall-tab plang-kayu font-display font-bold text-xs sm:text-sm px-4 py-2 rounded-xl transition">
+              Los Jajanan Tradisional Mbah Kromo
+            </button>
+            <button onclick="switchStall('sayur')" id="stall-btn-sayur" class="stall-tab plang-kayu font-display font-bold text-xs sm:text-sm px-4 py-2 rounded-xl transition">
+              Los Sayur & Buah Pak Slamet
+            </button>
+          </div>
+
+          <div id="market-items-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <!-- Diisi dinamis oleh JS -->
+          </div>
+        </div>
+
+        <!-- KOLOM KANAN (5 Kolom): BAKUL BELANJA & LACI KASIR KAYU -->
+        <div class="lg:col-span-5 space-y-4">
+          <div class="anyaman-besek rounded-3xl p-5 border-2 border-jati-800 space-y-4 shadow-md">
+            <div class="flex items-center justify-between border-b-2 border-jati-600 pb-2">
+              <h3 class="font-display text-lg font-bold text-jati-900">Bakul Belanja Pembeli</h3>
+              <button onclick="clearCart()" class="text-xs font-extrabold text-terakota-700 hover:underline">
+                Kosongkan Bakul
+              </button>
+            </div>
+
+            <div id="cart-items-list" class="space-y-2 max-h-56 overflow-y-auto pr-1">
+              <!-- Diisi dinamis oleh JS -->
+            </div>
+
+            <!-- Nota Kertas Cokelat + Praktik Tawar-Menawar Etnomatematika -->
+            <div class="bg-amber-50 rounded-2xl p-4 border-2 border-jati-800 space-y-2.5 shadow-inner">
+              <div class="flex justify-between items-center text-xs sm:text-sm font-bold text-jati-800">
+                <span>Jumlah Barang (Satuan Tradisional):</span>
+                <span id="cart-total-qty">0 barang</span>
+              </div>
+              <div class="flex justify-between items-center text-xs sm:text-sm font-bold text-jati-800">
+                <span>Subtotal Harga Awal:</span>
+                <span id="cart-subtotal-price">Rp0</span>
+              </div>
+
+              <!-- Fitur Etnomatematika: Tawar-Menawar Harga Khas Pasar Tradisional -->
+              <div id="bargain-box" class="bg-kuningan-100/80 p-2.5 rounded-xl border border-jati-500 space-y-1.5">
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-xs font-extrabold text-jati-900">Tawar-Menawar Pasar:</span>
+                  <span id="bargain-discount-label" class="text-xs font-extrabold text-pandan-700">Potongan: Rp0</span>
+                </div>
+                <div class="flex flex-wrap gap-1.5">
+                  <button type="button" onclick="applyMarketBargain(0)" class="px-2.5 py-1 rounded-lg bg-white border border-jati-600 text-[11px] font-bold text-jati-900 hover:bg-jati-100">
+                    Harga Pas
+                  </button>
+                  <button type="button" onclick="applyMarketBargain(1000)" class="px-2.5 py-1 rounded-lg bg-white border border-jati-600 text-[11px] font-bold text-jati-900 hover:bg-jati-100">
+                    Tawar -Rp1.000
+                  </button>
+                  <button type="button" onclick="applyMarketBargain(2500)" class="px-2.5 py-1 rounded-lg bg-white border border-jati-600 text-[11px] font-bold text-jati-900 hover:bg-jati-100">
+                    Tawar -Rp2.500
+                  </button>
+                </div>
+              </div>
+
+              <div class="flex justify-between items-center border-t-2 border-dashed border-jati-400 pt-2">
+                <span class="font-display font-bold text-base text-jati-900">TOTAL BELANJA:</span>
+                <span id="cart-total-price" class="font-display font-bold text-2xl text-terakota-700">Rp0</span>
+              </div>
+              <p id="cart-total-words" class="text-xs font-bold text-jati-700 text-right italic">Nol rupiah</p>
+              <p class="text-[11px] text-jati-700 text-right">Batas maksimal transaksi: <strong>Rp99.999</strong> (5 nilai tempat)</p>
+            </div>
+
+            <button id="btn-start-payment" onclick="preparePaymentPhase()" disabled
+              class="w-full py-3 rounded-2xl font-display font-bold text-base border-2 border-jati-900 transition bg-jati-300 text-jati-600 cursor-not-allowed">
+              Terima Uang Pembeli & Hitung Kembalian
+            </button>
+          </div>
+
+          <!-- LACI UANG KAYU PEDAGANG (TAHAP PEMBAYARAN & KEMBALIAN) -->
+          <div id="payment-panel" class="hidden papan-jati text-amber-50 rounded-3xl p-5 space-y-4 animate-pop">
+            <div class="flex items-center justify-between border-b border-kuningan-400/40 pb-2">
+              <h3 class="font-display text-lg font-bold text-kuningan-300">Laci Kasir Kayu: Hitung Uang Kembalian</h3>
+              <span class="text-[11px] font-extrabold bg-pandan-600 text-white px-2.5 py-0.5 rounded-lg border border-jati-900">Laci Terbuka</span>
+            </div>
+
+            <!-- Uang yang Diserahkan Pembeli -->
+            <div class="bg-jati-900/75 p-3.5 rounded-2xl border border-kuningan-500/60 space-y-2">
+              <div class="flex justify-between items-center">
+                <span class="text-xs sm:text-sm font-bold text-amber-100">Uang Tunai dari Pembeli:</span>
+                <span id="pay-buyer-money" class="font-display text-xl font-bold text-kuningan-300">Rp0</span>
+              </div>
+              <div id="pay-buyer-bills-visual" class="flex flex-wrap gap-2 pt-1"></div>
+              <div class="flex justify-between items-center text-xs sm:text-sm font-bold text-amber-100 border-t border-jati-700 pt-2">
+                <span>Total Belanja:</span>
+                <span id="pay-total-bill" class="text-rose-300">Rp0</span>
+              </div>
+            </div>
+
+            <!-- Input Nominal Kembalian & Laci Pecahan -->
+            <div class="space-y-3">
+              <div>
+                <label class="block text-xs font-extrabold text-kuningan-300 mb-1">
+                  1. Ketik nominal uang kembalian pembeli (dalam Rupiah):
+                </label>
+                <input type="number" id="input-change-guess" placeholder="Contoh: 15000 (ketik 0 apabila uang pas)"
+                  class="w-full px-3.5 py-2 rounded-xl border-2 border-jati-900 font-display font-bold text-lg text-jati-900 bg-amber-50 focus:outline-none focus:ring-2 focus:ring-kuningan-400" />
+              </div>
+
+              <div>
+                <div class="flex items-center justify-between mb-1.5">
+                  <label class="text-xs font-extrabold text-kuningan-300">
+                    2. Pilih lembar atau koin uang kembalian dari laci kayu:
+                  </label>
+                  <button onclick="resetSelectedChange()" class="text-xs font-bold text-rose-300 hover:underline">
+                    Kembalikan ke Laci
+                  </button>
+                </div>
+
+                <div id="cashier-denominations-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                  <!-- Diisi oleh JS -->
+                </div>
+              </div>
+
+              <!-- Susunan Uang Kembalian di Tangan Kasir -->
+              <div class="bg-jati-900/75 p-3 rounded-2xl border border-jati-600 space-y-2">
+                <div class="flex justify-between items-center">
+                  <span class="text-xs font-bold text-amber-200">Jumlah Uang Kembalian yang Dipilih:</span>
+                  <span id="selected-change-total" class="font-display text-lg font-bold text-kuningan-300">Rp0</span>
+                </div>
+                <div id="selected-change-chips" class="flex flex-wrap gap-1.5 min-h-[28px]">
+                  <span class="text-xs text-amber-200/70 italic">Apabila uang pembeli pas (kembalian Rp0), langsung tekan tombol hijau di bawah.</span>
+                </div>
+              </div>
+
+              <button onclick="verifyCashierTransaction()" class="w-full py-3 rounded-2xl bg-pandan-600 hover:bg-pandan-500 text-white font-display font-bold text-base border-2 border-jati-900 shadow-md transition">
+                Serahkan Uang Kembalian kepada Pembeli
+              </button>
+
+              <div id="cashier-feedback" class="hidden p-3.5 rounded-2xl border-2 text-xs sm:text-sm font-bold"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         6. EVALUASI KISI-KISI (10 BUTIR SOAL TERPETAKAN)
+    ====================================================================== -->
+    <section id="page-kuis" class="page-section hidden animate-pop space-y-6">
+      <div class="papan-jati text-amber-50 rounded-2xl px-6 py-4 flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h2 class="font-display text-2xl font-bold text-kuningan-300">Evaluasi Berbasis Kisi-Kisi</h2>
+          <p class="text-xs sm:text-sm text-amber-100">10 Butir Soal Terpetakan Sesuai Kisi-Kisi Matematika SD Kelas 5 (Fase C)</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="toggleBlueprintModal()" class="plang-kayu font-extrabold text-xs px-3.5 py-2 rounded-xl">
+            Lihat Tabel Kisi-Kisi
+          </button>
+          <button onclick="restartQuiz()" class="bg-kuningan-400 hover:bg-kuningan-300 text-jati-900 font-extrabold text-xs px-3.5 py-2 rounded-xl border-2 border-jati-900">
+            Ulangi Evaluasi
+          </button>
+        </div>
+      </div>
+
+      <!-- Tabel Kisi-Kisi Resmi -->
+      <div id="quiz-blueprint-box" class="hidden kertas-buram rounded-3xl p-5 animate-pop">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="font-display text-lg font-bold text-jati-900">Tabel Kisi-Kisi Soal Evaluasi Bilangan Cacah s.d. 100.000</h3>
+          <button onclick="toggleBlueprintModal()" class="text-xs font-extrabold text-terakota-700 hover:underline">Tutup ✕</button>
+        </div>
+        <div class="overflow-x-auto bg-white/90 rounded-2xl border border-jati-400">
+          <table class="w-full text-left border-collapse text-xs sm:text-sm">
+            <thead>
+              <tr class="bg-jati-800 text-amber-50">
+                <th class="p-2.5">No.</th>
+                <th class="p-2.5">Indikator Pencapaian Kompetensi</th>
+                <th class="p-2.5">Tingkat Kognitif</th>
+                <th class="p-2.5">Nomor Soal</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-jati-200 text-jati-900">
+              <tr>
+                <td class="p-2.5 font-bold">1</td>
+                <td class="p-2.5">Membaca dan menulis lambang bilangan cacah sampai 100.000 pada label harga pasar.</td>
+                <td class="p-2.5">C1 - C2</td>
+                <td class="p-2.5 font-extrabold text-terakota-700">Soal 1 dan 2</td>
+              </tr>
+              <tr>
+                <td class="p-2.5 font-bold">2</td>
+                <td class="p-2.5">Menentukan nilai tempat dan nilai angka bilangan cacah sampai 100.000.</td>
+                <td class="p-2.5">C2 - C3</td>
+                <td class="p-2.5 font-extrabold text-terakota-700">Soal 3 dan 4</td>
+              </tr>
+              <tr>
+                <td class="p-2.5 font-bold">3</td>
+                <td class="p-2.5">Membandingkan dan mengurutkan harga barang dagangan hingga 100.000.</td>
+                <td class="p-2.5">C3</td>
+                <td class="p-2.5 font-extrabold text-terakota-700">Soal 5 dan 6</td>
+              </tr>
+              <tr>
+                <td class="p-2.5 font-bold">4</td>
+                <td class="p-2.5">Melakukan komposisi dan dekomposisi pecahan uang Rupiah hingga 100.000.</td>
+                <td class="p-2.5">C3 - C4</td>
+                <td class="p-2.5 font-extrabold text-terakota-700">Soal 7 dan 8</td>
+              </tr>
+              <tr>
+                <td class="p-2.5 font-bold">5</td>
+                <td class="p-2.5">Menyelesaikan soal cerita pemecahan masalah total belanja dan uang kembalian.</td>
+                <td class="p-2.5">C4 (HOTS)</td>
+                <td class="p-2.5 font-extrabold text-terakota-700">Soal 9 dan 10</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Kontainer Soal Aktif -->
+      <div id="quiz-active-container" class="kertas-buram rounded-3xl p-6 space-y-5">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b-2 border-jati-300 pb-3">
+          <div class="flex flex-wrap items-center gap-2">
+            <span id="quiz-q-badge" class="papan-jati text-kuningan-300 font-display font-bold text-sm px-3.5 py-1 rounded-xl">
+              Soal 1 / 10
+            </span>
+            <span id="quiz-indicator-tag" class="bg-white/90 text-jati-900 border border-jati-600 text-xs font-extrabold px-3 py-1 rounded-xl">
+              Indikator 1
+            </span>
+          </div>
+          <div class="text-xs sm:text-sm font-extrabold text-pandan-700 bg-white/80 px-3 py-1 rounded-xl border border-pandan-600">
+            Skor Sementara: <span id="quiz-live-score" class="font-display text-lg">0</span>
+          </div>
+        </div>
+
+        <!-- Pil Nomor Soal (Bebas Lompat Nomor) -->
+        <div id="quiz-number-pills" class="flex flex-wrap gap-1.5"></div>
+
+        <!-- Pertanyaan & Visual SVG -->
+        <div class="space-y-4">
+          <div id="quiz-visual-box" class="hidden anyaman-besek p-4 rounded-2xl border-2 border-jati-700 flex flex-wrap items-center justify-center gap-3"></div>
+
+          <h3 id="quiz-question-text" class="font-display text-lg sm:text-xl font-bold text-jati-900 leading-snug">
+            Memuat soal...
+          </h3>
+
+          <div id="quiz-options-list" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+        </div>
+
+        <!-- Pembahasan -->
+        <div id="quiz-explanation-box" class="hidden rounded-2xl p-4 border-2 space-y-1.5 animate-pop">
+          <h4 id="quiz-exp-title" class="font-display font-bold text-base"></h4>
+          <p id="quiz-exp-text" class="text-xs sm:text-sm leading-relaxed"></p>
+        </d
